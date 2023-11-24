@@ -20,5 +20,14 @@ func (h *Handler) InitRoutes() *gin.Engine {
 
 	router.GET("/ping", h.pong)
 
+	userRoutes := router.Group("/users")
+	{
+		userRoutes.POST("/", h.createUser)
+		userRoutes.GET("/:id", h.getUserByID)
+		userRoutes.PUT("/:id", h.updateUser)
+		userRoutes.DELETE("/:id", h.deleteUser)
+		userRoutes.GET("/", h.getAllUsers)
+	}
+
 	return router
 }
